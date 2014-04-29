@@ -1,0 +1,26 @@
+//move functions
+//I will be constantly making functions for the robot
+
+void forward() {
+
+  motor[right1] = 75;
+  motor[right2] = 75;
+  wait1Msec(1000);
+  motor[left1] = 75;
+  motor[left2] = 75;
+}//end of move function
+
+void turnLeft() {
+
+  motor[right1] = -75;
+  motor[right2] = -75;
+  motor[left1] = 75;
+  motor[left2] = 75;
+  wait1Msec(1000);
+  motor[right1] = 0;
+  motor[right2] = 0;
+  motor[left1] = 0;
+  motor[left2] = 0;
+
+}
+
