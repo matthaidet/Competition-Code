@@ -1,26 +1,30 @@
 //move functions
 //I will be constantly making functions for the robot
 
-void forward() {
+void forward(int speed, int time) {
 
-  motor[right1] = 75;
-  motor[right2] = 75;
-  wait1Msec(1000);
-  motor[left1] = 75;
-  motor[left2] = 75;
+  motor[right1] = speed;
+  motor[right2] = speed;
+  wait1Msec(time);
+  stop();
 }//end of move function
 
-void turnLeft() {
+void turn(String direction, int speed, int time) {
+if(direction == "right"){
+int *= -1;
+}
+  motor[right1] = speed;
+  motor[right2] = speed;
+  motor[left1] = -speed;
+  motor[left2] = -speed;
+  wait1Msec(time);
+  stop(); 
+}
 
-  motor[right1] = -75;
-  motor[right2] = -75;
-  motor[left1] = 75;
-  motor[left2] = 75;
-  wait1Msec(1000);
+void stop(){
   motor[right1] = 0;
   motor[right2] = 0;
   motor[left1] = 0;
   motor[left2] = 0;
-
 }
 
