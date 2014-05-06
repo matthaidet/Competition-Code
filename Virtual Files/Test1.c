@@ -23,22 +23,17 @@
 |*  MAKE SURE TO "SAVE AS" INSTEAD  *|
 \************************************/
 
-void forward() {
-
-while(true) {
+void forward(int speed) {
   // your code goes here
-	motor[rightMotor] = 75;
-	motor[leftMotor] = -75;
-	motor[right1] = 75;
-	motor[left1] = -75;
+	motor[rightMotor] = speed;
+	motor[leftMotor] = -speed;
+	motor[right1] = speed;
+	motor[left1] = -speed;
 	wait1Msec(1000);
 	motor[rightMotor] = 0;
 	motor[right1] = 0;
 	motor[left1] = 0;
 	motor[leftMotor]= 0;
-
-}//i love
-
 }//end of function
 
 void lift() {
@@ -53,7 +48,7 @@ task main()
 {
 
 	// your code goes here
-	forward();
+	forward(75);
 	lift();
 
 }
