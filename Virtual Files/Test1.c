@@ -40,9 +40,10 @@ void forward(int speed, int time) {
 stop();
 }//end of function
 
-void lift(int speed) {
+void lift(int speed, int time) {
    motor[lift1] = speed;
    motor[lift2] = speed;
+   wait1Msec(time);
 }
 
 
@@ -52,6 +53,6 @@ task main()
 
 
 	forward(75, 1000);
-	lift(80);
+	lift(80, 2000);
 
 }
