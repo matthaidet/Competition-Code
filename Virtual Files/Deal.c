@@ -7,10 +7,10 @@
 #pragma config(Sensor, dgtl3,  leftEncoder,    sensorQuadEncoder)
 #pragma config(Sensor, dgtl6,  touchSensor,    sensorTouch)
 #pragma config(Sensor, dgtl8,  sonarSensor,    sensorSONAR_cm)
-#pragma config(Motor,  port2,           rightMotor,    tmotorServoContinuousRotation, openLoop, reversed)
-#pragma config(Motor,  port3,           leftMotor,     tmotorServoContinuousRotation, openLoop)
-#pragma config(Motor,  port4,           right1,        tmotorServoContinousRotation,  openLoop, reversed)
-#pragma config(Motor,  port5,           left1,         tmotorServoContinousRotation,  openLoop)
+#pragma config(Motor,  port1,           frontRight,    tmotorServoContinuousRotation, openLoop, reversed)//front right motor
+#pragma config(Motor,  port2,           backRight,    tmotorServoContinuousRotation, openLoop, reversed)//back right motor
+#pragma config(Motor,  port3,           frontLeft,     tmotorServoContinuousRotation, openLoop)//front left motor
+#pragma config(Motor,  port4,           backLeft,        tmotorServoContinousRotation,  openLoop)//back left motor
 #pragma config(Motor,  port6,           claw,          tmotorServContinousRotation,   openLoop)
 #pragma config(Motor,  port8,           lift1,         tmotorServoContinousRotation, openLoop)
 #pragma config(Motor,  port9,           lift2,         tmotorServoContinousRotation, openLoop)
@@ -25,18 +25,18 @@
 \************************************/
 
 void stop(){
-	motor[rightMotor] = 0;
-	motor[right1] = 0;
-	motor[left1] = 0;
-	motor[leftMotor]= 0;
+	motor[frontRight] = 0;
+	motor[backRight] = 0;
+	motor[frontLeft] = 0;
+	motor[backLeft]= 0;
 }
 
 
 void forward(int speed, int time) {
-	motor[rightMotor] = speed;
-	motor[leftMotor] = -speed;
-	motor[right1] = speed;
-	motor[left1] = -speed;
+	motor[frontLeft] = speed;
+	motor[backLeft] = speed;
+	motor[frontRight] = speed;
+	motor[backRight] = speed;
 	wait1Msec(time);
 stop();
 }//end of function
@@ -44,21 +44,42 @@ stop();
 void lift(int speed, int time) {
    motor[lift1] = speed;
    motor[lift2] = speed;
+   wait1Msec(time);
 }
 
 void grab(int speed, int time) {
 	motor[claw] = speed;
-	wait1Msec(1000);
+	wait1Msec(time);
 
+}
+
+void turnRight(int speed, int time) {
+	motor[frontLeft] = -speed;
+	motor[backLeft] = -speed;
+	motor[frontRight] = speed;
+	motor[backRight] = speed;
+	wait1Msec(time);
+
+}
+
+void turnLeft(int speed, int time) {
+	motor[frontLeft] = speed;
+	motor[backLeft] = speed;
+	motor[frontRight] = -speed;
+	motor[backRight] = -speed;
+	wait1Msec(time);
 }
 
 
 
 task main()
 {
+	turnRight(65, 1500);
+	forward(75, 2800);//go forward
+	lift(90, 6000);
+	turnRight(65, 400);
+	forward(75, 500);
 
-	forward(-75, 2000);
-	lift(80, 3000);
 
 
 }
